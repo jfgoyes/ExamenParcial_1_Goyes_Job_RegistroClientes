@@ -1,0 +1,116 @@
+<div class="registration-container">
+  <h2>Examen_Parcial_1_Goyes_Job</h2>
+  
+  <form [formGroup]="customerForm" (ngSubmit)="onSubmit()" class="registration-form">
+    
+    <div class="form-group">
+      <label for="fullName">Nombres completos *</label>
+      <input 
+        type="text" 
+        id="fullName" 
+        formControlName="fullName" 
+        class="form-control"
+        [class.is-invalid]="isFieldInvalid('fullName')"
+        placeholder="Ingrese sus nombres completos">
+      
+      <div *ngIf="isFieldInvalid('fullName')" class="invalid-feedback">
+        <div *ngIf="customerForm.get('fullName')?.errors?.['required']">
+          Los nombres completos son obligatorios
+        </div>
+        <div *ngIf="customerForm.get('fullName')?.errors?.['minlength']">
+          Mínimo 2 caracteres requeridos
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="email">Correo electrónico *</label>
+      <input 
+        type="email" 
+        id="email" 
+        formControlName="email" 
+        class="form-control"
+        [class.is-invalid]="isFieldInvalid('email')"
+        placeholder="ejemplo@correo.com">
+      
+      <div *ngIf="isFieldInvalid('email')" class="invalid-feedback">
+        <div *ngIf="customerForm.get('email')?.errors?.['required']">
+          El correo electrónico es obligatorio
+        </div>
+        <div *ngIf="customerForm.get('email')?.errors?.['email']">
+          Por favor ingrese un correo electrónico válido
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="phone">Número de teléfono *</label>
+      <input 
+        type="tel" 
+        id="phone" 
+        formControlName="phone" 
+        class="form-control"
+        [class.is-invalid]="isFieldInvalid('phone')"
+        placeholder="Ingrese su número de teléfono">
+      
+      <div *ngIf="isFieldInvalid('phone')" class="invalid-feedback">
+        <div *ngIf="customerForm.get('phone')?.errors?.['required']">
+          El número de teléfono es obligatorio
+        </div>
+        <div *ngIf="customerForm.get('phone')?.errors?.['pattern']">
+          Solo se permiten números
+        </div>
+        <div *ngIf="customerForm.get('phone')?.errors?.['minlength']">
+          Mínimo 10 dígitos requeridos
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="customerType">Tipo de cliente *</label>
+      <select 
+        id="customerType" 
+        formControlName="customerType" 
+        class="form-control"
+        [class.is-invalid]="isFieldInvalid('customerType')">
+        <option value="">Seleccione un tipo</option>
+        <option value="Regular">Regular</option>
+        <option value="Premium">Premium</option>
+        <option value="Empresarial">Empresarial</option>
+      </select>
+      
+      <div *ngIf="isFieldInvalid('customerType')" class="invalid-feedback">
+        Debe seleccionar un tipo de cliente
+      </div>
+    </div>
+
+    <div class="form-group terms-group">
+      <div class="form-check">
+        <input 
+          type="checkbox" 
+          id="acceptTerms" 
+          formControlName="acceptTerms" 
+          class="form-check-input"
+          [class.is-invalid]="isFieldInvalid('acceptTerms')">
+        <label for="acceptTerms" class="form-check-label">
+          Acepto los términos y condiciones *
+        </label>
+      </div>
+      
+      <div *ngIf="isFieldInvalid('acceptTerms')" class="invalid-feedback">
+        Debe aceptar los términos y condiciones
+      </div>
+    </div>
+
+    <button 
+      type="submit" 
+      class="btn btn-primary btn-submit"
+      [disabled]="customerForm.invalid">
+      Registrar cliente
+    </button>
+
+    <div *ngIf="showSuccessMessage" class="alert alert-success mt-3">
+      ¡El cliente ha sido registrado correctamente!
+    </div>
+  </form>
+</div>

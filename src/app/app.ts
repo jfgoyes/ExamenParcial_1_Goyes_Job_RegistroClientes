@@ -1,12 +1,14 @@
-import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { Component } from '@angular/core';
+import { CustomerRegistrationForm } from './customer-registration/customer-registration-form/customer-registration-form';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
   templateUrl: './app.html',
-  styleUrl: './app.css'
+  styleUrl: './app.css',
+  imports: [CommonModule, CustomerRegistrationForm],
+  standalone: true
 })
 export class App {
-  protected readonly title = signal('costumer-registration-main');
+  protected readonly title = 'customer-registration-main';
 }
